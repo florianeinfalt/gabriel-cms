@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "bootstrap/fixes.html" as fixes %}
+
+{% block page %}
+<div class="container">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <form name='delete_user' method='POST' action=''>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                           <thead>
+                                <tr>
+                                    {% for header_value in all_users_header %}
+                                        <th>{{ header_value }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for this_user in all_users_list %}
+                                    <tr>
+                                        {% for value in this_user %}
+                                            <td>
+                                            {% if value == true %}
+                                                <i class="fa fa-check-circle fa-fw"></i>
+                                            {% elif value == false %}
+                                                <i class="fa fa-times-circle fa-fw"></i>
+                                            {% else %}
+                                                {{ value }}
+                                            {% endif %}
+                                            </td>
+                                        {% endfor %}
+                                        {% if this_user[4] %}
+                                            {% if user == this_user[1]%}
+                                                <td><button type="submit" name="submit" value="disable-{{this_user[2]}}" class="btn btn-danger btn-xs" disabled="disabled">Disable</button></td>
+                                            {% else %}
+                                                <td><button type="submit" name="submit" value="disable-{{this_user[2]}}" class="btn btn-danger btn-xs">Disable</button></td>
+                                            {% endif %}
+                                        {% else %}
+                                            <td><button type="submit" name="submit" value="enable-{{this_user[2]}}" class="btn btn-success btn-xs">Enable</button></td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+{% endblock page %}

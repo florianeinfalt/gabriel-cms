@@ -1,0 +1,15 @@
+{% extends "base_security.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "bootstrap/fixes.html" as fixes %}
+
+{% block page %}
+<form class="form" method="POST" action="/register" role="form">
+      {{ register_form.hidden_tag() }}
+      {{ wtf.form_errors(register_form) }}
+      {{ wtf.form_field(register_form.name) }}
+      {{ wtf.form_field(register_form.email) }}
+      {{ wtf.form_field(register_form.password) }}
+      {{ wtf.form_field(register_form.password_confirm) }}
+      {{ wtf.form_field(register_form.register_button) }}
+</form>
+{% endblock page %}

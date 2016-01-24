@@ -1,0 +1,14 @@
+.tox/*
+.idea/*
+.cache/*
+__pycache__/*
+bin/*
+docs/_build/*
+*.db
+*.egg
+*.egg-info
+*.log
+*.pyc
+*.pyd
+*.pyo
+.DS_Store

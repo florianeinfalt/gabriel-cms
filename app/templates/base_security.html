@@ -1,0 +1,59 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "bootstrap/fixes.html" as fixes %}
+
+{% block head %}
+    {{super()}}
+    {{fixes.ie8()}}
+{% endblock %}
+
+{% block title %}
+    Gabriel CMS
+{% endblock title %}
+
+{% block styles %}
+    <link href="{{bootstrap_find_resource('css/bootstrap.css', cdn='bootstrap')}}" rel="stylesheet" media="screen">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='icons/favicon.ico') }}" rel="shortcut icon">
+{% endblock styles%}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-warning alert-dismissable">
+                            <a class="close" data-dismiss="alert">×</a>
+                            {{message}}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <img src="{{ url_for('static', filename='logo_white.jpg') }}" width="140">
+            <br>
+            <br>
+            <br>
+            {% block page %}
+            {% endblock page %}
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <p class="navbar-text pull-left"><a href="/register"><button type="button" class="btn btn-default btn-xs">Register</button></a></p>
+            <p class="navbar-text pull-left"><a href="/login"><button type="button" class="btn btn-default btn-xs">Login</button></a></p>
+            <p class="navbar-text pull-right"><small>&copy; Florian Einfalt 2015</small></p>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
