@@ -8,6 +8,7 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     SECRET_KEY = '\\\xbcB\x01\xf7\x8b\x16\xb6:\xe7\xf8\x0bt\x9b\x8c\x9bF\x04\x00|\x05Xk3'
     WTF_CSRF_SECRET_KEY = 'a.\xdc\x95n\xbe&\xe4`\x94N\x1b\x18\xab\x1d\x827\x1f7\x9b\x15(Q\xbc'
+    PER_PAGE = 10
 
 class Development(Config):
     DEBUG = True

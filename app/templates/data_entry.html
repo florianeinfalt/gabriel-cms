@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "bootstrap/fixes.html" as fixes %}
+{% import "pagination.html" as pagination %}
+
+
+{% block page %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#qualification" aria-controls="qualification" role="tab" data-toggle="tab">Qualification</a></li>
+                    <li role="presentation"><a href="#board" aria-controls="board" role="tab" data-toggle="tab">Board</a></li>
+                    <li role="presentation"><a href="#subject" aria-controls="subject" role="tab" data-toggle="tab">Subject</a></li>
+                    <li role="presentation"><a href="#exam" aria-controls="exam" role="tab" data-toggle="tab">Exam</a></li>
+                    <li role="presentation"><a href="#section" aria-controls="section" role="tab" data-toggle="tab">Section</a></li>
+                    <li role="presentation"><a href="#question" aria-controls="question" role="tab" data-toggle="tab">Question</a></li>
+                </ul>
+                <!-- Tab panes -->
+                <br>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="qualification">
+                        {{ wtf.quick_form(qualifications_form, action="/data/entry", method="post", extra_classes="form-group form-group-sm") }}
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="board">
+                        {{ wtf.quick_form(board_form, action="/data/entry", method="post", extra_classes="form-group form-group-sm") }}
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="subject">
+                        {{ wtf.quick_form(subject_form, action="/data/entry", method="post", extra_classes="form-group form-group-sm") }}
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="exam">
+                        {{ wtf.quick_form(exam_form, action="/data/entry", method="post", extra_classes="form-group form-group-sm") }}
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="section">
+                        {{ wtf.quick_form(section_form, action="/data/entry", method="post", extra_classes="form-group form-group-sm") }}
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="question">
+                        {{ wtf.quick_form(question_form, action="/data/entry", method="post", extra_classes="form-group form-group-sm") }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+{% endblock page %}

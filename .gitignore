@@ -3,6 +3,7 @@
 .cache/*
 __pycache__/*
 bin/*
+dist/*
 docs/_build/*
 *.db
 *.egg

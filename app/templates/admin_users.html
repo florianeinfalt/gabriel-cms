@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 {% import "bootstrap/fixes.html" as fixes %}
+{% from "bootstrap/pagination.html" import render_pagination %}
 
 {% block page %}
 <div class="container">
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10">
-                <form name='delete_user' method='POST' action=''>
+                <form name='delete_user' method='POST' action='{{ url_for_this_page(pagination.page)}}'>
                     <div class="table-responsive">
                         <table class="table table-striped">
                            <thead>
@@ -45,6 +46,7 @@
                             </tbody>
                         </table>
                     </div>
+                    {{ render_pagination(pagination, size='sm') }}
                 </form>
             </div>
         <div class="col-md-1"></div>

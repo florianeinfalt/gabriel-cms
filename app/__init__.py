@@ -15,23 +15,18 @@ def create_app(config_name):
     migrate = Migrate(app, db)
     manager = Manager(app)
     manager.add_command('db', MigrateCommand)
-    return app, db, migrate, manager
+    login_manager = LoginManager()
+    login_manager.init_app(app)
+    login_manager.login_view = 'login'
+    return app, db, migrate, manager, login_manager
 
 # Create App (-> APP, DB)
-app, db, migrate, manager = create_app('development')
+app, db, migrate, manager, login_manager = create_app('development')
 
-# Import DB models
-from app.models import User
-# import defaults
-
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = 'login'
-
-@login_manager.user_loader
-def load_user(email):
-    return User.query.filter_by(email=email).first()
-
-from app.views import admin, index, userhandler
-
-
+from models import User
+try:
+    if not User.query.filter_by(email='florian.einfalt@me.com').first():
+        import defaults
+except:
+    pass
+import app.views
