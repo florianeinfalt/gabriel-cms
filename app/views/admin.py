@@ -22,15 +22,15 @@ def admin_users(page):
 
     query = User.query.all
     count = len(query())
-    users = utilities.get_users_for_page(query, page)
-    users_header = ['ID', 'Name', 'Email Address', 'Role', 'Is Live?', 'Enable/Disable']
-    users_list = [[str(user.id), user.name, user.email, user.role.name, user.is_live] for user in users]
+    users = utilities.get_items_for_page(query, page)
+    table_header = ['ID', 'Name', 'Email Address', 'Role', 'Is Live?', 'Enable/Disable']
+    table_data = [[str(user.id), user.name, user.email, user.role.name, user.is_live] for user in users]
     if not users and page != 1:
         abort(404)
     pagination = Pagination(query(), page, app.config['PER_PAGE'], count, users)
     return render_template('admin_users.html',
                            user=current_user.name,
                            user_role=current_user.role.name,
-                           all_users_header=users_header,
-                           all_users_list=users_list,
+                           all_users_header=table_header,
+                           all_users_list=table_data,
                            pagination=pagination)

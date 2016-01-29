@@ -27,7 +27,7 @@ def url_for_this_page(page):
 app.jinja_env.globals['url_for_this_page'] = url_for_this_page
 
 
-def get_users_for_page(query, page, per_page=app.config['PER_PAGE']):
+def get_items_for_page(query, page, per_page=app.config['PER_PAGE']):
     min_range = (page - 1) * per_page
     max_range = min_range + per_page
     return query()[min_range:max_range]

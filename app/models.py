@@ -72,7 +72,7 @@ class Qualification(db.Model):
     subjects = db.relationship('Subject', backref='qualification')
 
     def __repr__(self):
-        return '<Qualification {0} ({1}) {2}>'.format(self.name, self.locale, self.year)
+        return '{0} {1} ({2})'.format(self.name, self.year, self.locale)
 
 
 class Board(db.Model):
@@ -85,7 +85,7 @@ class Board(db.Model):
     subjects = db.relationship('Subject', backref='board')
 
     def __repr__(self):
-        return '<Board {0} ({1})>'.format(self.name, self.locale)
+        return '{0} ({1})'.format(self.name, self.locale)
 
 
 class Subject(db.Model):
@@ -104,7 +104,11 @@ class Subject(db.Model):
     exams = db.relationship('Exam', backref='subject')
 
     def __repr__(self):
-        return '<Subject {0} ({1}, {2})>'.format(self.name, self.qualification.name, self.board.name)
+        return '{0} | {1} {2} | {3} ({4})'.format(self.name,
+                                                  self.qualification.name,
+                                                  self.qualification.year,
+                                                  self.board.name,
+                                                  self.board.locale)
 
 
 class Exam(db.Model):
@@ -122,7 +126,12 @@ class Exam(db.Model):
     sections = db.relationship('Section', backref='exam')
 
     def __repr__(self):
-        return '<Exam {0} ({1})>'.format(self.name, self.subject.name)
+        return '{0} | {1} | {2} {3} | {4} ({5})'.format(self.name,
+                                                        self.subject.name,
+                                                        self.subject.qualification.name,
+                                                        self.subject.qualification.year,
+                                                        self.subject.board.name,
+                                                        self.subject.board.locale)
 
 
 class Section(db.Model):
@@ -136,7 +145,13 @@ class Section(db.Model):
     questions = db.relationship('Question', backref='section')
 
     def __repr__(self):
-        return '<Section {0} ({1} {2})>'.format(self.topic, self.exam.name, self.exam.subject.name)
+        return '{0} | {1} | {2} | {3} {4} | {5} ({6})'.format(self.topic,
+                                                              self.exam.name,
+                                                              self.exam.subject.name,
+                                                              self.exam.subject.qualification.name,
+                                                              self.exam.subject.qualification.year,
+                                                              self.exam.subject.board.name,
+                                                              self.exam.subject.board.locale)
 
 
 class Question(db.Model):
@@ -149,4 +164,12 @@ class Question(db.Model):
     text = db.Column(db.String, nullable=False)
     meta = db.Column(TextPickleType(pickler=json))
 
-
+    def __repr__(self):
+        return 'Question {0} | {1} | {2} | {3} {4} | {5} ({6})'.format(self.id,
+                                                                       self.section.topic,
+                                                                       self.section.exam.name,
+                                                                       self.section.exam.subject.name,
+                                                                       self.section.exam.subject.qualification.name,
+                                                                       self.section.exam.subject.qualification.year,
+                                                                       self.section.exam.subject.board.name,
+                                                                       self.section.exam.subject.board.locale)
